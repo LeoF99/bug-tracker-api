@@ -14,4 +14,17 @@ module.exports = {
       return false;
     }
   },
+
+  async unassign(userId, projectId) {
+    try {
+      const del = await connection('assigned_projects')
+        .where('user_id', userId)
+        .where('project_id', projectId)
+        .del();
+
+      return del;
+    } catch (error) {
+      return false;
+    }
+  },
 };
