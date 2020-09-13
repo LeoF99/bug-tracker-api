@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const connection = require('../../database/connection');
 const messages = require('../../resources/messages');
 const AuthService = require('./AuthService');
+// const MailService = require('../Users/Mail/MailService');
 
 module.exports = {
   async login(req, res) {
@@ -15,7 +16,14 @@ module.exports = {
       return res.status(401).json({ error: messages.INCORRECT_PASSWORD });
     }
 
-    // if (!user[0].is_confirmed) return res.json({ message: messages.USER_NOT_CONFIRMED });
+    // if (!user[0].is_confirmed) {
+    //   const mail = await MailService.sendConfirmationMail(user[0]);
+
+    //   if (mail === true) return res.json({ message: messages.USER_NOT_CONFIRMED });
+
+    //   return res.status(500).json({ error: mail });
+    // }
+
     delete user[0].password;
     const tokenSecret = process.env.TOKEN_SECRET;
 
