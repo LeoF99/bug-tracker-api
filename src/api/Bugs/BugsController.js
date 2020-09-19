@@ -74,4 +74,40 @@ module.exports = {
       return res.status(500).json({ error: error.message });
     }
   },
+
+  async getBugsByProject(req, res) {
+    const { projectId } = req.params;
+
+    try {
+      const bugs = await connection('bugs').select('*').where('project_id', projectId);
+
+      return res.json({ bugs });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  },
+
+  async getBugsByUserCreator(req, res) {
+    const { userId } = req.params;
+
+    try {
+      const bugs = await connection('bugs').select('*').where('user_creator', userId);
+
+      return res.json({ bugs });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  },
+
+  async getBugsByUserAssigned(req, res) {
+    const { userId } = req.params;
+
+    try {
+      const bugs = await connection('bugs').select('*').where('user_assigned', userId);
+
+      return res.json({ bugs });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  },
 };

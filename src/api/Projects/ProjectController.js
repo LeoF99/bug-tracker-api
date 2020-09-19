@@ -89,4 +89,16 @@ module.exports = {
       return res.status(500).json({ error: error.message });
     }
   },
+
+  async getProjectsByUser(req, res) {
+    const { userId } = req.params;
+
+    try {
+      const projects = await connection('projects').select('*').where('user_creator', userId);
+
+      return res.json({ projects });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  },
 };

@@ -14,12 +14,18 @@ routes.get('/users/:id', AuthController.verifyToken, UserController.show); // sh
 routes.put('/users/:id', AuthController.verifyToken, UserController.update); // update
 routes.delete('/users/:id', AuthController.verifyToken, UserController.delete); // delete
 
+routes.get('/users/projects/:id', AuthController.verifyToken, ProjectController.getProjectsByUser); // get projects by user
+routes.get('/users/bugs/created/:id', AuthController.verifyToken, BugsController.getBugsByUserCreator); // get bugs by user creator
+routes.get('/users/bugs/assigned/:id', AuthController.verifyToken, BugsController.getBugsByUserAssigned); // get bugs by user assigned
+
 // projects routes
 routes.post('/projects', AuthController.verifyToken, ProjectController.create); // create
 routes.get('/projects', AuthController.verifyToken, ProjectController.index); // index
 routes.get('/projects/:id', AuthController.verifyToken, ProjectController.show); // show
 routes.put('/projects/:id', AuthController.verifyToken, ProjectController.update); // update
 routes.delete('/projects/:id', AuthController.verifyToken, ProjectController.delete); // delete
+
+routes.get('/projects/bugs/:id', AuthController.verifyToken, BugsController.getBugsByProject); // get bugs by project
 
 // bugs routes
 routes.post('/bugs', AuthController.verifyToken, BugsController.create); // create
